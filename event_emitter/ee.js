@@ -43,27 +43,6 @@
 			stored.listener.apply(stored.context, args);
 		}
 	};
-
-	
-	var ee = new EE();
-	var list1, list2, list3;
-	
-	ee.on('event', list1 = function(arg){
-		console.log("Guten Morgen " + arg + " " + this.key);
-	}, { key: 'listener1' });
-	
-	ee.on('event', list2 = function(arg){
-		console.log("Guten Tag " + arg + " " + this.key);
-	}, { key: 'listener2' });
-	
-	ee.emit('event','Frau Zietek');
-	
-	ee.on('event', list3 = function(arg){
-		console.log("Guten Abend " + arg + " " + this.key);
-	}, { key: 'listener3' });
-	
-	ee.emit('event','Weronika');
-	
 	
 	global.UAM.EventEmitter = EE;
 
