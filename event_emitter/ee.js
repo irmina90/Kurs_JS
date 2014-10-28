@@ -11,10 +11,25 @@
 	};
 
 	EE.prototype.on = function (eventName, listener, context) {
+		var self = this;
+		
 		if (!this.listeners[eventName]) {
 			this.listeners[eventName] = [];
 		}
-		this.listeners[eventName].push({listener: listener, context: context});
+		
+		var data = {
+			listener: listener,
+			context: context
+		}
+		
+		this.listeners[eventName].push(data);
+		
+		return function () {
+			var position = self.listeners[eventName].indexOf(data);
+			if (position > -1){
+				self.listeners[eventName].splice(position,1);
+			}
+		}
 	};
 
 	EE.prototype.emit = function (eventName /*, other args...*/) {
@@ -26,17 +41,6 @@
 		for (var i = 0; i < length; i++) {
 			stored = listener[i];
 			stored.listener.apply(stored.context, args);
-		}
-	};
-	
-	EE.prototype.removeListener = function (eventName, listener) {
-		var position = -1;
-		if (this.listeners[eventName]) {
-			position = this.listeners[eventName].indexOf(listener);
-			console.log(position);
-			if (position != -1){
-				this.listeners[eventName].splice(position,1);
-			}
 		}
 	};
 
@@ -58,24 +62,9 @@
 		console.log("Guten Abend " + arg + " " + this.key);
 	}, { key: 'listener3' });
 	
-	ee.removeListener('event',list1);
-	ee.removeListener('event',list2);
-	
 	ee.emit('event','Weronika');
 	
 	
-//	var ee = new EE();
-//
-//	var removeListener = ee.on('test', function (arg1, arg2) {
-//		console.log(arg1, arg2, this.key);
-//	}, { key: 'value' });
-//
-//	ee.emit('test', 1, 2); // 1, 2 value
-//
-//	removeListener(); //removes my listener from the event emitter;
-//
-//	ee.emit('test'); //nothing will execute
-
 	global.UAM.EventEmitter = EE;
 
 }(window));
