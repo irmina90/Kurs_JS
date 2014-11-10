@@ -1,0 +1,99 @@
+.todo-list {
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    width: 50%;
+    margin: 0 auto;
+    padding-top: 1.2rem;
+}
+
+.title {
+    display: block;
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-align: center;
+    color: rgb(28, 160, 65);
+    padding-bottom: 0.8rem;
+}
+
+.add-task {
+    float: left;
+    position: relative;
+    width: 100%;
+    padding: 1.2rem 0;
+    clear: both;
+}
+
+.add-task input{
+    display: inline-block;
+    padding: 0.4rem 0;
+    border-radius: 4px 0 0 4px;
+    width: 88%;
+}
+
+.add-task input[type="text"]{
+    padding-left: 0.4rem;
+}
+
+.add-task .button{
+    display: inline-block;
+    background: rgb(28, 184, 65);
+    border-radius: 0 4px 4px 0;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+    padding: 0.4rem 1.2rem;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+    cursor: pointer;
+    position: absolute;
+    width: 3.2rem;
+    height: 1.2rem;
+    right: 0;
+    top: 1.2rem;
+}
+
+.add-task .button:hover {
+    background: rgb(28, 200, 65);
+}
+
+.list {
+    padding-top: 1.2rem;
+    list-style: none;
+    clear: both;
+}
+
+.list li {
+    min-height: 2rem;
+    line-height: 2rem;
+    background-color: rgb(200, 255, 200);
+    border-top: 0.1rem solid green;
+    margin-left: -2.4rem;
+    padding-left: 0.8rem;
+    cursor: pointer;
+}
+
+.list li .button {
+    float: right;
+    text-align: right;
+    cursor: pointer;
+    margin-right: 1.2rem;
+    color: black;
+}
+
+.list li .button:hover {
+    color: white;
+}
+
+.list li.active .button {
+    color: white;
+}
+
+.list li.active {
+    background-color: red;
+    color: white;
+    text-decoration: line-through;
+}
+
+.list li.inactive:hover {
+    background: rgb(28, 200, 65);
+    color: white;
+    transition: background 2s;
+}
