@@ -14,7 +14,7 @@
     padding-bottom: 0.8rem;
 }
 
-.add-task {
+#inputview {
     float: left;
     position: relative;
     width: 100%;
@@ -22,18 +22,18 @@
     clear: both;
 }
 
-.add-task input{
+#inputview input{
     display: inline-block;
     padding: 0.4rem 0;
     border-radius: 4px 0 0 4px;
     width: 88%;
 }
 
-.add-task input[type="text"]{
+#inputview input[type="text"]{
     padding-left: 0.4rem;
 }
 
-.add-task .button{
+#inputview .button{
     display: inline-block;
     background: rgb(28, 184, 65);
     border-radius: 0 4px 4px 0;
@@ -50,17 +50,17 @@
     top: 1.2rem;
 }
 
-.add-task .button:hover {
+#inputview .button:hover {
     background: rgb(28, 200, 65);
 }
 
-.list {
+#listview {
     padding-top: 1.2rem;
     list-style: none;
     clear: both;
 }
 
-.list li {
+#listview li {
     min-height: 2rem;
     line-height: 2rem;
     background-color: rgb(200, 255, 200);
@@ -70,7 +70,7 @@
     cursor: pointer;
 }
 
-.list li .button {
+#listview li .button {
     float: right;
     text-align: right;
     cursor: pointer;
@@ -78,22 +78,30 @@
     color: black;
 }
 
-.list li .button:hover {
+#listview li .button:hover {
     color: white;
 }
 
-.list li.active .button {
+#listview li.active .button {
     color: white;
 }
 
-.list li.active {
+#listview li.active {
     background-color: red;
     color: white;
     text-decoration: line-through;
 }
 
-.list li.inactive:hover {
+#listview li.inactive:hover {
     background: rgb(28, 200, 65);
     color: white;
     transition: background 2s;
+}
+
+#footerview {
+    font-size: 0.8rem;
+}
+
+#footerview .number {
+    font-weight: bold;
 }

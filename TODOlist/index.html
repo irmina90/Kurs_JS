@@ -2,7 +2,7 @@
     <head>
         <meta charset="utf-8">
 
-        <title>TODO list</title>
+        <title>My first SPA question</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -14,17 +14,22 @@
 
         <span class="title">TODO list</span>
 
-        <div class="add-task">
+        <div id="inputview">
             <input id="new-prod" type="text" placeholder="New task to do">
             <div class="button">Add</div>
         </div>
 
-        <ul class="list">
+        <ul id="listview">
             <li class="inactive">bread</li>
             <li class="active">blablabla</li>
             <li class="inactive">cheese</li>
             <li class="inactive">chicken</li>
         </ul>
+
+        <div id="footerview">
+            <div class="sum-tasks">All tasks to do: <span class="number"></span></div>
+            <div class="active-tasks">Number of active tasks: <span class="number"></span></div>
+        </div>
 
     </div>
         <script src="js/main.js"></script>
