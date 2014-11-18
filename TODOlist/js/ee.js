@@ -1,38 +1,49 @@
-UAM.EventEmitter = function () {
-    //store the listeners somewhere
-    this.listeners = {};
-};
+(function (global) {
+    var EE;
 
-UAM.EventEmitter.prototype.on = function (eventName, listener, context) {
-    var self = this;
-
-    if (!this.listeners[eventName]) {
-        this.listeners[eventName] = [];
+    if (!global.UAM) {
+        global.UAM = {};
     }
 
-    var data = {
-        listener: listener,
-        context: context
-    }
+    EE = function () {
+        //store the listeners somewhere
+        this.listeners = {};
+    };
 
-    this.listeners[eventName].push(data);
+    EE.prototype.on = function (eventName, listener, context) {
+        var self = this;
 
-    return function () {
-        var position = self.listeners[eventName].indexOf(data);
-        if (position > -1){
-            self.listeners[eventName].splice(position,1);
+        if (!this.listeners[eventName]) {
+            this.listeners[eventName] = [];
         }
-    }
-};
 
-UAM.EventEmitter.prototype.emit = function (eventName /*, other args...*/) {
-    var args = Array.prototype.slice.call(arguments, 1);
-    var listener = this.listeners[eventName];
-    var length = listener.length;
-    var stored;
+        var data = {
+            listener: listener,
+            context: context
+        }
 
-    for (var i = 0; i < length; i++) {
-        stored = listener[i];
-        stored.listener.apply(stored.context, args);
-    }
-};
+        this.listeners[eventName].push(data);
+
+        return function () {
+            var position = self.listeners[eventName].indexOf(data);
+            if (position > -1){
+                self.listeners[eventName].splice(position,1);
+            }
+        }
+    };
+
+    EE.prototype.emit = function (eventName) {
+        var args = Array.prototype.slice.call(arguments, 1);
+        var listener = this.listeners[eventName];
+        var length = listener.length;
+        var stored;
+
+        for (var i = 0; i < length; i++) {
+            stored = listener[i];
+            stored.listener.apply(stored.context, args);
+        }
+    };
+
+    global.UAM.EventEmitter = EE;
+
+}(window));
