@@ -18,10 +18,6 @@ UAM.ListView = function (elements) {
 
     var self = this;
 
-    this.on('addToHTML',function(e){
-        self.addLi(e);
-    });
-
     document.querySelector('ul').addEventListener('click',function(event){
         if (event.target.tagName === "LI") {
             if ( event.target.classList.contains("inactive")) {
@@ -61,16 +57,16 @@ UAM.FooterView = function (elements) {
 
     var self = this;
 
-    this.on('addStat', function(e){
-        var allTasks = self._elements.querySelector('.sum-tasks .number');
-        allTasks.innerHTML = e;
-    });
-
-    this.on('updateStat', function(e){
-        var activeTasks = self._elements.querySelector('.active-tasks .number');
-        activeTasks.innerHTML = e;
-    });
-
 };
 
 UAM.utils.inherits(UAM.EventEmitter, UAM.FooterView);
+
+UAM.FooterView.prototype.addStat = function (e) {
+    var allTasks = this._elements.querySelector('.sum-tasks .number');
+    allTasks.innerHTML = e;
+};
+
+UAM.FooterView.prototype.updateStat = function (e) {
+    var activeTasks = this._elements.querySelector('.active-tasks .number');
+    activeTasks.innerHTML = e;
+};

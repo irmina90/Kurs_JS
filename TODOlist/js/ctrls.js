@@ -4,44 +4,43 @@ function InputCtrl(inputView,store) {
     var self = this;
 
     this._inputView.on('clickOnButton', function(e){
-        self.addToStore(e);
+        if(e.length > 0)
+        {
+            if(self._store.data.indexOf(e) === -1) self._store.add(e);
+        }
     });
 };
 
-InputCtrl.prototype.addToStore = function (task) {
-    if(task.length > 0)
-    {
-        if(this._store.data.indexOf(task) === -1) this._store.add(task);
-    }
-};
-
-function ListCtrl(listView,store) {
+function ListCtrl(listView,store,http) {
     this._store = store;
     this._listView = listView;
+    this._http = http;
     var self = this;
 
     this._store.on('addToTheList', function(e){
-        self.addToTheList(e);
+        self._listView.addLi(e);
     });
 
     this._listView.on('LiToActive', function(e){
-        self.updateTheList(e,'active');
+        self._store.update(e,'active');
     });
 
     this._listView.on('LiToInactive', function(e){
-        self.updateTheList(e,'inactive');
+        self._store.update(e,'inactive');
     });
 
 };
 
-ListCtrl.prototype.addToTheList = function (task) {
-    this._listView.emit('addToHTML',task);
-};
+ListCtrl.prototype.load = function () {
+    var callback = function (err, response) {
+        if (err) {
+            throw err;
+        }
+        console.log(response);
+    }
 
-ListCtrl.prototype.updateTheList = function (id,data) {
-    this._store.update(id,data);
+    this._http.request('/api/todos', 'GET', requestData, callback);
 };
-
 
 
 function FooterCtrl(footerView,store) {
@@ -50,20 +49,12 @@ function FooterCtrl(footerView,store) {
     var self = this;
 
     this._store.on('addStatistic', function(e){
-        self.addStatistic(e);
+        self._footerView.addStat(e);
     });
 
     this._store.on('updateStatistic', function(e){
-        self.updateStatistic(e);
+        self._footerView.updateStat(e);
     })
 
 
-};
-
-FooterCtrl.prototype.addStatistic = function (number) {
-    this._footerView.emit('addStat',number);
-};
-
-FooterCtrl.prototype.updateStatistic = function (number) {
-    this._footerView.emit('updateStat',number);
 };

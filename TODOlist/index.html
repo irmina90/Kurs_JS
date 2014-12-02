@@ -10,6 +10,23 @@
     </head>
     <body>
 
+    <script type="text/javascript">
+        /*var httpRequest = new XMLHttpRequest();
+        httpRequest.onreadystatechange = function () {
+            if (httpRequest.readyState !== 4 ) {
+                return;
+            }
+            if (httpRequest.status !== 200) {
+                throw new Error('Request failed');
+            }
+            console.log(httpRequest.responseText);
+            var data = JSON.parse(httpRequest.responseText);
+            // store.add(data.value);
+        };
+        httpRequest.open('GET', '/api/todos/');
+        httpRequest.send();*/
+    </script>
+
     <div class="todo-list">
 
         <span class="title">TODO list</span>
@@ -20,10 +37,6 @@
         </div>
 
         <ul id="listview">
-            <li class="inactive">buy a bus ticket</li>
-            <li class="active">do laundry</li>
-            <li class="inactive">make a party</li>
-            <li class="inactive">study JS</li>
         </ul>
 
         <div id="footerview">
