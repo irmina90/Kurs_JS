@@ -10,23 +10,6 @@
     </head>
     <body>
 
-    <script type="text/javascript">
-        /*var httpRequest = new XMLHttpRequest();
-        httpRequest.onreadystatechange = function () {
-            if (httpRequest.readyState !== 4 ) {
-                return;
-            }
-            if (httpRequest.status !== 200) {
-                throw new Error('Request failed');
-            }
-            console.log(httpRequest.responseText);
-            var data = JSON.parse(httpRequest.responseText);
-            // store.add(data.value);
-        };
-        httpRequest.open('GET', '/api/todos/');
-        httpRequest.send();*/
-    </script>
-
     <div class="todo-list">
 
         <span class="title">TODO list</span>
@@ -34,22 +17,24 @@
         <div id="inputview">
             <input id="new-prod" type="text" placeholder="New task to do">
             <div class="button">Add</div>
+            <div class="button-save">Save</div>
         </div>
 
         <ul id="listview">
         </ul>
 
         <div id="footerview">
-            <div class="sum-tasks">All tasks to do: <span class="number">4</span></div>
-            <div class="active-tasks">Number of active tasks: <span class="number">1</span></div>
+            <div class="sum-tasks">All tasks to do: <span class="number">0</span></div>
+            <div class="active-tasks">Number of active tasks: <span class="number">0</span></div>
         </div>
 
     </div>
-    <script src="js/ee.js"></script>
+        <script src="js/ee.js"></script>
         <script src="js/utils.js"></script>
         <script src="js/store.js"></script>
         <script src="js/app.js"></script>
         <script src="js/views.js"></script>
         <script src="js/ctrls.js"></script>
+        <script src="js/http.js"></script>
     </body>
 </html>

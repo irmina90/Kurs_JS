@@ -1,8 +1,8 @@
 UAM.Store = function () {
 	UAM.EventEmitter.call(this);
 	this.data  = [];
-	this.allTask = 4;
-	this.activeTask = 1;
+	this.allTask = 0;
+	this.activeTask = 0;
 };
 
 UAM.utils.inherits(UAM.EventEmitter, UAM.Store);

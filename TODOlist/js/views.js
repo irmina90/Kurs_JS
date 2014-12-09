@@ -1,11 +1,17 @@
 UAM.InputView = function (elements) {
     UAM.EventEmitter.call(this);
     this._elements  = elements;
+    this.tasks = [];
     var self = this;
 
     this._elements.querySelector('.button').addEventListener('click',function(){
         var name = document.getElementById('new-prod').value;
         self.emit('clickOnButton', name);
+        self.tasks.push(name);
+    });
+
+    this._elements.querySelector('.button-save').addEventListener('click',function(){
+        self.emit('clickOnButtonSave', self.tasks);
     });
 };
 

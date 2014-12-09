@@ -33,7 +33,7 @@
     padding-left: 0.4rem;
 }
 
-#inputview .button{
+#inputview .button {
     display: inline-block;
     background: rgb(28, 184, 65);
     border-radius: 0 4px 4px 0;
@@ -46,11 +46,32 @@
     position: absolute;
     width: 3.2rem;
     height: 1.2rem;
+    line-height: 1.2rem;
     right: 0;
     top: 1.2rem;
 }
 
-#inputview .button:hover {
+#inputview .button-save {
+    display: inline-block;
+    background: rgb(28, 184, 65);
+    border-radius: 4px 4px 4px 4px;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+    padding: 0.4rem 1.2rem;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+    cursor: pointer;
+    margin-top: 1rem;
+    line-height: 1.2rem;
+    position: absolute;
+    right: 0;
+    top: 2.4rem;
+    width: 3.2rem;
+    height: 1.2rem;
+}
+
+#inputview .button:hover,
+#inputview .button-save:hover {
     background: rgb(28, 200, 65);
 }
 
@@ -99,6 +120,7 @@
 }
 
 #footerview {
+    position: relative;
     font-size: 0.8rem;
 }
 
