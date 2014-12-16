@@ -1,18 +1,22 @@
 [
-{
-"id": 0,
-"value": "buy a bus ticket"
-},
-{
-"id": 1,
-"value": "do laundry"
-},
-{
-"id": 2,
-"value": "make a party"
-},
-{
-"id": 3,
-"value": "study JS"
-}
+  {
+    "id":0,
+    "value":"buy a bus ticket",
+    "status": "inactive"
+  },
+  {
+    "id":1,
+    "value":"do laundry",
+    "status": "inactive"
+  },
+  {
+    "id":2,
+    "value":"make a party",
+    "status": "inactive"
+  },
+  {
+    "id":3,
+    "value":"study JS",
+    "status": "inactive"
+  }
 ]

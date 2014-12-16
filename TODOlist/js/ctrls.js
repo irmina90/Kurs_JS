@@ -2,31 +2,28 @@ function InputCtrl(inputView,store,http) {
     this._store = store;
     this._inputView = inputView;
     this._http = http;
-    this.data = [];
     var self = this;
 
     this._inputView.on('clickOnButton', function(e){
         if(e.length > 0)
         {
-            if(self._store.data.indexOf(e) === -1) self._store.add(e);
+            if(self._store.data.indexOf(e) === -1) self._store.add({
+                'id': self._store.allTask + 1,
+                'value': e,
+                'status': 'inactive'
+            });
+            self._store.save++;
         }
     });
 
-    this._inputView.on('clickOnButtonSave', function(e){
-        var firstOne = self._store.allTask- e.length;
-        for(var i=0; i<e.length; i++){
-            var task = {
-                id: firstOne+i,
-                value: e[i]
-            };
-
-            self.data.push(task);
-        }
-        self.save(self.data);
+    this._inputView.on('clickOnButtonSave', function(){
+        self.save();
     });
 };
 
-InputCtrl.prototype.save = function (data) {
+InputCtrl.prototype.save = function () {
+    var self = this;
+
     var callback = function (err, response) {
         if (err) {
             throw err;
@@ -34,7 +31,17 @@ InputCtrl.prototype.save = function (data) {
         console.log(response);
     };
 
-    this._http.request('/api/todos/all.json', 'POST', data, callback);
+    var dataNew = [];
+    var firstOne = self._store.allTask - self._store.save + 1;
+    for(var i=0; i<self._store.data.length; i++){
+        if (self._store.data[i].id >= firstOne) {
+            dataNew.push(self._store.data[i]);
+        }
+    }
+    console.log(dataNew);
+    self._store.save = 0;
+
+    this._http.request('/api/todos/', 'POST', JSON.stringify(dataNew), callback);
 };
 
 function ListCtrl(listView,store,http) {
@@ -71,7 +78,11 @@ ListCtrl.prototype.load = function () {
 
     var requestData = function (data){
         for(var i=0; i<data.length; i++) {
-            self._store.add(data[i].value);
+            self._store.add({
+                'id': data[i].id,
+                'value': data[i].value,
+                'status': data[i].status
+            });
         }
     };
 

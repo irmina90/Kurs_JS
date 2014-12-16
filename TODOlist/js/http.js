@@ -14,32 +14,41 @@ UAM.Http = {
 			console.log('Proszę czekać...');
 		}
 
-		httpRequest.open(method,url,true);
-		// httpRequest.setRequestHeader("Content-Type","application/json"); nie działa :(
-		//httpRequest.setRequestHeader("Content-Length", json.length);
-		httpRequest.onprogress = onProgress;
-		httpRequest.onload = onLoad;
-		httpRequest.onerror = onError;
-		httpRequest.onreadystatechange = function () {
-
-			if (httpRequest.readyState !== 4) return;
-			if (httpRequest.status === 200) {
-				if (method === 'GET') {
+		if (method === 'GET') {
+			httpRequest.open(method,url,true);
+			httpRequest.onreadystatechange = function () {
+				if (httpRequest.readyState !== 4) return;
+				if (httpRequest.status == 200) {
 					var data = JSON.parse(httpRequest.responseText);
 					requestData && requestData(data);
+				} else {
+					callback && callback(status);
+					console.log(callback);
 				}
-				if (method === 'POST') {
-					console.log(requestData);
-					var json = JSON.stringify(requestData);
-					console.log(json);
-				}
-			} else {
-				callback && callback(status);
-				console.log(callback);
-			}
-		};
+			};
+			httpRequest.onprogress = onProgress;
+			httpRequest.onload = onLoad;
+			httpRequest.onerror = onError;
+			httpRequest.send(null);
+		}
 
-		httpRequest.send();
+		if (method === 'POST') {
+			httpRequest.open(method,url,true);
+			httpRequest.onreadystatechange = function () {
+				if (httpRequest.readyState !== 4) return;
+				if (httpRequest.status !== 200) {
+					callback && callback(status);
+					console.log(callback);
+				}
+			};
+			httpRequest.onprogress = onProgress;
+			httpRequest.onload = onLoad;
+			httpRequest.onerror = onError;
+			httpRequest.responseType="json";
+			httpRequest.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
+			console.log(requestData);
+			httpRequest.send(requestData);
+		}
 
 	}
 };

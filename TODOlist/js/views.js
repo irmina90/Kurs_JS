@@ -1,17 +1,15 @@
 UAM.InputView = function (elements) {
     UAM.EventEmitter.call(this);
     this._elements  = elements;
-    this.tasks = [];
     var self = this;
 
     this._elements.querySelector('.button').addEventListener('click',function(){
         var name = document.getElementById('new-prod').value;
         self.emit('clickOnButton', name);
-        self.tasks.push(name);
     });
 
     this._elements.querySelector('.button-save').addEventListener('click',function(){
-        self.emit('clickOnButtonSave', self.tasks);
+        self.emit('clickOnButtonSave');
     });
 };
 
@@ -21,25 +19,35 @@ UAM.utils.inherits(UAM.EventEmitter, UAM.InputView);
 UAM.ListView = function (elements) {
     UAM.EventEmitter.call(this);
     this._elements  = elements;
-
     var self = this;
 
     document.querySelector('ul').addEventListener('click',function(event){
+        var position = function() {
+            var position = 0;
+            var currentNode = event.target;
+            var firstNode = currentNode.parentNode.firstChild;
+            while(firstNode != currentNode) {
+                position++;
+                currentNode = currentNode.previousSibling;
+            }
+            console.log(position);
+            return position;
+        }
+
         if (event.target.tagName === "LI") {
             if ( event.target.classList.contains("inactive")) {
                 event.target.classList.remove('inactive');
                 event.target.classList.add('active');
-
-                self.emit('LiToActive', event.target.id);
+                self.emit('LiToActive', position()-1);
 
             }
             else {
                 event.target.classList.remove('active');
                 event.target.classList.add('inactive');
-
-                self.emit('LiToInactive', event.target.id);
+                self.emit('LiToInactive', position()-1);
             }
         }
+        event.stopPropagation();
 
     });
 };
@@ -47,14 +55,12 @@ UAM.ListView = function (elements) {
 UAM.utils.inherits(UAM.EventEmitter, UAM.ListView);
 
 
-UAM.ListView.prototype.addLi = function (task) {
-    if(task.length > 0) {
-        var li = document.createElement('li');
-        var ul = document.getElementsByTagName('ul')[0];
-        li.innerHTML = task;
-        var newLi = ul.appendChild(li);
-        newLi.classList.add('inactive');
-    }
+UAM.ListView.prototype.addLi = function (data) {
+    var li = document.createElement('li');
+    var ul = document.getElementsByTagName('ul')[0];
+    li.innerHTML = data.value;
+    var newLi = ul.appendChild(li);
+    newLi.classList.add(data.status);
 };
 
 UAM.FooterView = function (elements) {

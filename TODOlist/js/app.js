@@ -9,5 +9,5 @@ window.addEventListener('DOMContentLoaded', function () {
 
 	new InputCtrl(inputView, store, UAM.Http);
 	new ListCtrl(listView, store, UAM.Http);
-	new FooterCtrl(footerView, store);
+	new FooterCtrl(footerView, store, UAM.Http);
 });
