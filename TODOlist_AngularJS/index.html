@@ -16,22 +16,24 @@
 
     <body>
 
-    <div class="todo-list">
+    <div class="todo-list" ng-controller="TodoCtrl">
 
         <span class="title">TODO list</span>
 
         <div id="inputview">
-            <input id="new-prod" type="text" placeholder="New task to do">
-            <div class="button">Add</div>
-            <div class="button-save">Save</div>
+            <input id="new-prod" type="text" placeholder="New task to do" ng-model="inputValue">
+            <div class="button" ng-click="addNew()">Add</div>
         </div>
 
         <ul id="listview">
+            <li ng-repeat="element in elements"
+                ng-class="{'active': element.status === false}"
+                ng-click="check($index)">{{element.value}}</li>
         </ul>
 
         <div id="footerview">
-            <div class="sum-tasks">All tasks to do: <span class="number">0</span></div>
-            <div class="active-tasks">Number of active tasks: <span class="number">0</span></div>
+            <div class="sum-tasks">All tasks to do: <span class="number">{{elements.length}}</span></div>
+            <div class="active-tasks">Number of active tasks: <span class="number">{{active}}</span></div>
         </div>
 
     </div>
