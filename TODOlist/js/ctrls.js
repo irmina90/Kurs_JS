@@ -31,17 +31,17 @@ InputCtrl.prototype.save = function () {
         console.log(response);
     };
 
-    var dataNew = [];
+    /*var dataNew = [];
     var firstOne = self._store.allTask - self._store.save + 1;
     for(var i=0; i<self._store.data.length; i++){
         if (self._store.data[i].id >= firstOne) {
             dataNew.push(self._store.data[i]);
         }
     }
-    console.log(dataNew);
-    self._store.save = 0;
+    console.log(self._store.data);
+    self._store.save = 0; */
 
-    this._http.request('/api/todos/', 'POST', JSON.stringify(dataNew), callback);
+    this._http.request('/api/todos/', 'POST', JSON.stringify(self._store.data), callback);
 };
 
 function ListCtrl(listView,store,http) {
@@ -58,10 +58,12 @@ function ListCtrl(listView,store,http) {
 
     this._listView.on('LiToActive', function(e){
         self._store.update(e,'active');
+        self.update();
     });
 
     this._listView.on('LiToInactive', function(e){
         self._store.update(e,'inactive');
+        self.update();
     });
 
 };
@@ -86,7 +88,20 @@ ListCtrl.prototype.load = function () {
         }
     };
 
-    this._http.request('/api/todos/all.json', 'GET', requestData, callback);
+    this._http.request('/api/todos', 'GET', requestData, callback);
+};
+
+ListCtrl.prototype.update = function () {
+    var self = this;
+
+    var callback = function (err, response) {
+        if (err) {
+            throw err;
+        }
+        console.log(response);
+    };
+
+    this._http.request('/api/todos/', 'POST', JSON.stringify(self._store.data), callback);
 };
 
 function FooterCtrl(footerView,store) {
@@ -100,6 +115,5 @@ function FooterCtrl(footerView,store) {
 
     this._store.on('updateStatistic', function(e){
         self._footerView.updateStat(e);
-    })
-
+    });
 };

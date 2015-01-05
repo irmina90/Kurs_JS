@@ -29,7 +29,7 @@ UAM.Http = {
 			httpRequest.onprogress = onProgress;
 			httpRequest.onload = onLoad;
 			httpRequest.onerror = onError;
-			httpRequest.send(null);
+			httpRequest.send();
 		}
 
 		if (method === 'POST') {
@@ -45,8 +45,8 @@ UAM.Http = {
 			httpRequest.onload = onLoad;
 			httpRequest.onerror = onError;
 			httpRequest.responseType="json";
-			httpRequest.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
-			console.log(requestData);
+			httpRequest.setRequestHeader('Content-Type', 'application/json');
+			console.log("requestData wysylam: " + requestData);
 			httpRequest.send(requestData);
 		}
 

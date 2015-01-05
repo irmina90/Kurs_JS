@@ -6,6 +6,7 @@ UAM.InputView = function (elements) {
     this._elements.querySelector('.button').addEventListener('click',function(){
         var name = document.getElementById('new-prod').value;
         self.emit('clickOnButton', name);
+        document.getElementById('new-prod').value = '';
     });
 
     this._elements.querySelector('.button-save').addEventListener('click',function(){

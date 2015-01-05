@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en" ng-app="myapp">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>Web Applications [UAM]</title>
+
+    <meta name="author" content="Weronika Zietek">
+
+    <link rel="stylesheet" href="css/main.css">
+
+    <script src="lib/angular.js"></script>
+    <script src="js/todoctrl.js"></script>
+</head>
+
+    <body>
+
+    <div class="todo-list">
+
+        <span class="title">TODO list</span>
+
+        <div id="inputview">
+            <input id="new-prod" type="text" placeholder="New task to do">
+            <div class="button">Add</div>
+            <div class="button-save">Save</div>
+        </div>
+
+        <ul id="listview">
+        </ul>
+
+        <div id="footerview">
+            <div class="sum-tasks">All tasks to do: <span class="number">0</span></div>
+            <div class="active-tasks">Number of active tasks: <span class="number">0</span></div>
+        </div>
+
+    </div>
+    </body>
+</html>

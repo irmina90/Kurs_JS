@@ -3,7 +3,7 @@ UAM.Store = function () {
 	this.data  = [];
 	this.allTask = 0;
 	this.activeTask = 0;
-	this.save = 0;
+	//this.save = 0;
 };
 
 UAM.utils.inherits(UAM.EventEmitter, UAM.Store);
@@ -26,5 +26,8 @@ UAM.Store.prototype.update = function (id,data) {
 	if(data == 'inactive'){
 		this.activeTask--;
 	}
+
+	console.log('data' + self.data);
+
 	this.emit('updateStatistic',this.activeTask);
 };
