@@ -8,12 +8,12 @@ function InputCtrl(inputView,store,http) {
         if(e.length > 0)
         {
             if(self._store.data.indexOf(e) === -1) self._store.add({
-                'id': self._store.allTask + 1,
+                'id': self._store.allTask,
                 'value': e,
                 'status': 'inactive'
             });
-            self._store.save++;
         }
+        self.save();
     });
 
     this._inputView.on('clickOnButtonSave', function(){
@@ -31,17 +31,7 @@ InputCtrl.prototype.save = function () {
         console.log(response);
     };
 
-    /*var dataNew = [];
-    var firstOne = self._store.allTask - self._store.save + 1;
-    for(var i=0; i<self._store.data.length; i++){
-        if (self._store.data[i].id >= firstOne) {
-            dataNew.push(self._store.data[i]);
-        }
-    }
-    console.log(self._store.data);
-    self._store.save = 0; */
-
-    this._http.request('/api/todos/', 'POST', JSON.stringify(self._store.data), callback);
+    this._http.request('/api/todos', 'POST', JSON.stringify(self._store.data), callback);
 };
 
 function ListCtrl(listView,store,http) {
@@ -79,7 +69,7 @@ ListCtrl.prototype.load = function () {
     };
 
     var requestData = function (data){
-        for(var i=0; i<data.length; i++) {
+            for(var i=0; i<data.length; i++) {
             self._store.add({
                 'id': data[i].id,
                 'value': data[i].value,
@@ -89,6 +79,7 @@ ListCtrl.prototype.load = function () {
     };
 
     this._http.request('/api/todos', 'GET', requestData, callback);
+
 };
 
 ListCtrl.prototype.update = function () {

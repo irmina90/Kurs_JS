@@ -31,7 +31,7 @@ UAM.ListView = function (elements) {
                 position++;
                 currentNode = currentNode.previousSibling;
             }
-            console.log(position);
+            console.log('pozycja: ' + position);
             return position;
         }
 
@@ -39,13 +39,15 @@ UAM.ListView = function (elements) {
             if ( event.target.classList.contains("inactive")) {
                 event.target.classList.remove('inactive');
                 event.target.classList.add('active');
-                self.emit('LiToActive', position()-1);
+                self.emit('LiToActive', position()); // -1
+                //self.emit('clickOnButtonSave');
 
             }
             else {
                 event.target.classList.remove('active');
                 event.target.classList.add('inactive');
-                self.emit('LiToInactive', position()-1);
+                self.emit('LiToInactive', position()); // -1
+                //self.emit('clickOnButtonSave');
             }
         }
         event.stopPropagation();

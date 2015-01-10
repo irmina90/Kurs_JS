@@ -7,6 +7,7 @@ angular.module('myapp', []).controller('TodoCtrl', function ($scope) {
         if (!$scope.inputValue) {
             return;
         }
+
         $scope.elements.push({
             value: $scope.inputValue,
             status: true

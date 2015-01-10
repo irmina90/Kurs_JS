@@ -3,7 +3,6 @@ UAM.Store = function () {
 	this.data  = [];
 	this.allTask = 0;
 	this.activeTask = 0;
-	//this.save = 0;
 };
 
 UAM.utils.inherits(UAM.EventEmitter, UAM.Store);
@@ -12,22 +11,25 @@ UAM.Store.prototype.add = function (data) {
 	this.data.push(data);
 	this.allTask++;
 
+	if (data.status == 'active') this.activeTask++;
+
 	this.emit('addToTheList',data);
 	this.emit('addStatistic',this.allTask);
+	this.emit('updateStatistic',this.activeTask);
 };
 
 UAM.Store.prototype.update = function (id,data) {
 	var self = this;
+
+	console.log("id: " + id + " data: " + data);
 	self.data[id].status = data;
 
-	if(data == 'active'){
+	if(data === 'active'){
 		this.activeTask++;
 	}
-	if(data == 'inactive'){
+	if(data === 'inactive'){
 		this.activeTask--;
 	}
-
-	console.log('data' + self.data);
 
 	this.emit('updateStatistic',this.activeTask);
 };

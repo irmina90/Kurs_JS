@@ -12,6 +12,7 @@ UAM.Http = {
 
 		function onLoad(e) {
 			console.log('Proszę czekać...');
+			document.querySelector('.spinner').style.display = 'none';
 		}
 
 		if (method === 'GET') {
@@ -45,7 +46,7 @@ UAM.Http = {
 			httpRequest.onload = onLoad;
 			httpRequest.onerror = onError;
 			httpRequest.responseType="json";
-			httpRequest.setRequestHeader('Content-Type', 'application/json');
+			httpRequest.setRequestHeader('Content-Type', 'application/json; charset=utf-8');
 			console.log("requestData wysylam: " + requestData);
 			httpRequest.send(requestData);
 		}

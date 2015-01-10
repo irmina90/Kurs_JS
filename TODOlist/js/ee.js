@@ -35,7 +35,16 @@
     EE.prototype.emit = function (eventName) {
         var args = Array.prototype.slice.call(arguments, 1);
         var listener = this.listeners[eventName];
-        var length = listener.length;
+
+        var count = 0;
+        var j;
+        for (j in listener) {
+            if (listener.hasOwnProperty(j)) {
+                count++;
+            }
+        }
+
+        var length = count;
         var stored;
 
         for (var i = 0; i < length; i++) {
